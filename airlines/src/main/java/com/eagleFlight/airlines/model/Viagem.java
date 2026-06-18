@@ -1,41 +1,80 @@
 package com.eagleFlight.airlines.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Viagem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long Id;
-    private Long NumeroVoo;
     private String origem;
     private String destino;
-    private Long precoPassagem;
-    private Long assentosDisponveis;
+    private String dataVoo;
+    private double precoOriginal;
+    private double precoFinal;
+
+    @ManyToOne
+    @JoinColumn(name = "passageiro_id")
+    private Passageiro passageiro;
 
     public Viagem() {
     }
-    public Long getId() {return Id;}
-    public void setId(Long Id) {this.Id = Id;}
 
-    public Long setNumeroVoo() {return NumeroVoo;}
-    public void setNumerovoo(Long NumeroVoo) {this.NumeroVoo = NumeroVoo;}
+    public Long getId() {
+        return id;
+    }
 
-    public String getorigem() {return origem;}
-    public void setorigem(String origem) {this.origem = origem;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getdestino() {return destino;}
-    public void setdestino(String destino) {this.destino = destino;}
+    public String getOrigem() {
+        return origem;
+    }
 
-    public Long getprecoPassagem() {return precoPassagem;}
-    public void setprecoPassagem(Long precoPassagem) {this.precoPassagem = precoPassagem;}
+    public void setOrigem(String origem) {
+        this.origem = origem;
+    }
 
-    public Long assentosDisponveis() {return assentosDisponveis;}
-    public void setassentosDisponveis(Long assentosDisponveis) {this.assentosDisponveis = assentosDisponveis;}
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public String getDataVoo() {
+        return dataVoo;
+    }
+
+    public void setDataVoo(String dataVoo) {
+        this.dataVoo = dataVoo;
+    }
+
+    public double getPrecoOriginal() {
+        return precoOriginal;
+    }
+
+    public void setPrecoOriginal(double precoOriginal) {
+        this.precoOriginal = precoOriginal;
+    }
+
+    public double getPrecoFinal() {
+        return precoFinal;
+    }
+
+    public void setPrecoFinal(double precoFinal) {
+        this.precoFinal = precoFinal;
+    }
+
+    public Passageiro getPassageiro() {
+        return passageiro;
+    }
+
+    public void setPassageiro(Passageiro passageiro) {
+        this.passageiro = passageiro;
+    }
 }

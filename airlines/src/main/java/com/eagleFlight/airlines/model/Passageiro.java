@@ -10,25 +10,62 @@ public class Passageiro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long Id;
     private String nome;
     private Long idade;
     private String email;
+    private String categoriaFidelidade;
+    private Integer milhasAcumuladas;
 
     public Passageiro() {
     }
-        public Long getId() {return Id;}
-        public void setId (Long Id) {this.Id = Id;}
 
-        public String getnome() {return nome;}
-        public void setnome(String nome) {this.nome = nome;}
+    public Long getId() {
+        return id;
+    }
 
-        public Long idade() {return idade;}
-        public void setidade (Long idade) {this.idade = idade;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public String email() {return email;}
-        public void setemail(String email) {this.email = email;}
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
+    public Long getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Long idade) {
+        this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCategoriaFidelidade() {
+        return categoriaFidelidade;
+    }
+
+    public void setCategoriaFidelidade(String categoriaFidelidade) {
+        this.categoriaFidelidade = categoriaFidelidade;
+    }
+
+    public Integer getMilhasAcumuladas() {
+        return milhasAcumuladas;
+    }
+
+    public void setMilhasAcumuladas(Integer milhasAcumuladas) {
+        this.milhasAcumuladas = milhasAcumuladas;
+    }
 }
