@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+//Aqui são coletados todos os dados de passageiros, bem como a organização das informações no Banco de Dados.
+
 @Entity
 public class Passageiro {
 

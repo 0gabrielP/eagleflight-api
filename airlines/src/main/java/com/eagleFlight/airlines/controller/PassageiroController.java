@@ -15,12 +15,13 @@ public class PassageiroController {
     private passageiroRepository passageiroRepo;
 
     @GetMapping
-    public List<Passageiro> listarTodos() {
+    public List<Passageiro> listarPassageiros() {
         return passageiroRepo.findAll();
     }
 
     @PostMapping
-    public Passageiro cadastrar(@RequestBody Passageiro passageiro) {
+    public Passageiro cadastrarPassageiro(@RequestBody Passageiro passageiro) {
+        // Validações básicas padrão para o cadastro inicial
         if (passageiro.getCategoriaFidelidade() == null || passageiro.getCategoriaFidelidade().isEmpty()) {
             passageiro.setCategoriaFidelidade("BRONZE");
         }
@@ -28,6 +29,7 @@ public class PassageiroController {
         if (passageiro.getMilhasAcumuladas() == null) {
             passageiro.setMilhasAcumuladas(0);
         }
+
         return passageiroRepo.save(passageiro);
     }
 }

@@ -1,20 +1,27 @@
-# EagleFlight-API (Em Desenvolvimento Ativo)
+# Eagle Flight Airlines API
 
-Este projeto simula um desafio técnico real de nível **Desenvolvedor Java Pleno**. A proposta é construir um sistema de alta complexidade para gestão de linhas aéreas e programas de fidelidade (milhas).
+Uma API REST de gerenciamento de linhas aéreas e fidelização de passageiros desenvolvida em Java com Spring Boot e Spring Data JPA. O sistema calcula automaticamente descontos em passagens e acúmulo de milhas baseado na categoria de fidelidade do passageiro.
 
-## O Desafio
-O objetivo principal é gerenciar voos, passageiros e aplicar regras de negócio complexas, como cálculos de desconto em passagens com base em categorias de fidelidade (Bronze, Prata, Diamante) e conversão automática de reais gastos em acúmulo de milhas.
-
-## Minha Curva de Aprendizado e Evolução (Histórico do Projeto)
-
-Decidi documentar o passo a passo da evolução deste software para demonstrar meu processo de tomada de decisão arquitetural e amadurecimento técnico:
-
-* **Fase 1 (Atual - Concluída):** Modelagem inicial de dados e persistência. Criação das entidades `Passageiro` e `Viagem`, e estruturação da camada de persistência com Spring Data JPA e banco H2. (Foco em boas práticas de pacotes e nomenclatura CamelCase).
-* **Próxima Fase:** Ajuste fino da arquitetura de Controllers e implementação dos algoritmos de lógica matemática para cálculo de descontos e geração de milhas.
+## Funcionalidades Principais
+- **Cadastro de Passageiros:** Gerenciamento de clientes com atribuição de categorias automáticas (`BRONZE`, `PRATA`, `DIAMANTE`).
+- **Cálculo de Regras de Negócio Isoladas:** Camada de serviço (`Service`) robusta para calcular descontos e milhas sem poluir as rotas controladoras.
+- **Relacionamento Relacional:** Vínculo de integridade no banco de dados mapeando que muitos voos pertencem a um passageiro (`@ManyToOne`).
 
 ## Tecnologias Utilizadas
-* Java 17
-* Spring Boot 3.x
-* Spring Data JPA
-* Banco de Dados H2
-* Maven
+- **Java 17**
+- **Spring Boot 3.x**
+- **Spring Data JPA** (Persistência e Mapeamento Objeto-Relacional)
+- **H2 Database** (Banco de dados relacional em arquivo/memória)
+- **Maven** (Gerenciador de dependências)
+
+## Arquitetura do Projeto
+O projeto segue o padrão arquitetural em camadas para garantir a separação de responsabilidades:
+- `model`: Representação das tabelas e entidades do banco de dados.
+- `repository`: Interfaces que estendem o `JpaRepository` para operações de CRUD.
+- `service`: Concentração das regras de negócio e cálculos matemáticos da companhia.
+- `controller`: Exposição dos endpoints REST e recepção das requisições HTTP.
+
+## Como Executar o Projeto
+1. Clone o repositório:
+   ```bash
+   git clone [https://github.com/seu-usuario-aqui/banco_eagleFlight.git](https://github.com/seu-usuario-aqui/banco_eagleFlight.git)
