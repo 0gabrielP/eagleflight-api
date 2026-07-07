@@ -4,6 +4,7 @@ import com.eagleFlight.airlines.model.Passageiro;
 import com.eagleFlight.airlines.repository.passageiroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class PassageiroController {
     }
 
     @PostMapping
-    public Passageiro cadastrarPassageiro(@RequestBody Passageiro passageiro) {
+    public Passageiro cadastrarPassageiro(@Valid @RequestBody Passageiro passageiro) {
         // Validações básicas padrão para o cadastro inicial
         if (passageiro.getCategoriaFidelidade() == null || passageiro.getCategoriaFidelidade().isEmpty()) {
             passageiro.setCategoriaFidelidade("BRONZE");

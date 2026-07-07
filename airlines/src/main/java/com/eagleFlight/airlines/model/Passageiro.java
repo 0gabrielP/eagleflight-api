@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 //Aqui são coletados todos os dados de passageiros, bem como a organização das informações no Banco de Dados.
 
@@ -14,13 +17,22 @@ public class Passageiro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank (message = "O nome do passageiro é obrigatório!")
     private String nome;
+
+    @Min(value = 0, message = "A idade não pode ser negativa!")
     private Long idade;
+
+    @Email(message = "O e-mail informado precisa ser valido!")
+    @NotBlank(message = "O e-mail é obrigatório!")
     private String email;
+
     private String categoriaFidelidade;
+
     private Integer milhasAcumuladas;
 
     public Passageiro() {
+
     }
 
     public Long getId() {

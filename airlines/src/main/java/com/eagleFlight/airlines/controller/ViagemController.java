@@ -31,34 +31,31 @@ public class ViagemController {
 
     @PostMapping
     public Viagem cadastrarViagem(@RequestBody Viagem viagem) {
-        // 1. Verificar se a viagem possui um passageiro vinculado
+        // 1. Verificar se a viagem possui um passageiro vinculado.
         if (viagem.getPassageiro() != null && viagem.getPassageiro().getId() != null) {
 
-            // 2. Buscar o passageiro completo no banco de dados
-            Optional<Passageiro> passageiroOpt = passageiroRepo.findById(viagem.getPassageiro().getId());
+            // 2. Busca o passageiro. Se NÃO achar, o .orElseThrow() joga a exceção que o GlobalExceptionHandler vai identificar!
+            Passageiro passageiro = passageiroRepo.findById(viagem.getPassageiro().getId())
+                    .orElseThrow();
 
-            if (passageiroOpt.isPresent()) {
-                Passageiro passageiro = passageiroOpt.get();
+            // 3. Calcular preço final com desconto baseado na categoria
+            double precoFinal = fidelidadeService.calcularPrecoFinal(viagem.getPrecoOriginal(), passageiro.getCategoriaFidelidade());
+            viagem.setPrecoFinal(precoFinal);
 
-                // 3. Calcular preço final com desconto baseado na categoria
-                double precoFinal = fidelidadeService.calcularPrecoFinal(viagem.getPrecoOriginal(), passageiro.getCategoriaFidelidade());
-                viagem.setPrecoFinal(precoFinal);
+            // 4. Calcular milhas ganhas nesta viagem
+            int milhasGanhas = fidelidadeService.calcularMilhasGanhas(precoFinal, passageiro.getCategoriaFidelidade());
 
-                // 4. Calcular milhas ganhas nesta viagem
-                int milhasGanhas = fidelidadeService.calcularMilhasGanhas(precoFinal, passageiro.getCategoriaFidelidade());
-
-                // 5. Atualizar o saldo de milhas do passageiro e salvar
-                int saldoAtualizado = (passageiro.getMilhasAcumuladas() != null ? passageiro.getMilhasAcumuladas() : 0) + milhasGanhas;
-                passageiro.setMilhasAcumuladas(saldoAtualizado);
-                passageiroRepo.save(passageiro);
-            }
+            // 5. Atualizar o saldo de milhas do passageiro e salvar
+            int saldoAtualizado = (passageiro.getMilhasAcumuladas() != null ? passageiro.getMilhasAcumuladas() : 0) + milhasGanhas;
+            passageiro.setMilhasAcumuladas(saldoAtualizado);
+            passageiroRepo.save(passageiro);
         }
 
-        // Se por acaso a lógica não setou o preço final, ele assume o preço original
         if (viagem.getPrecoFinal() == 0) {
             viagem.setPrecoFinal(viagem.getPrecoOriginal());
         }
 
         return viagemRepo.save(viagem);
     }
+
 }
