@@ -23,6 +23,9 @@ public class Passageiro {
     @Min(value = 0, message = "A idade não pode ser negativa!")
     private Long idade;
 
+    @NotBlank(message = "O CPF é obrigatório")
+    private String cpf;
+
     @Email(message = "O e-mail informado precisa ser valido!")
     @NotBlank(message = "O e-mail é obrigatório!")
     private String email;
@@ -32,54 +35,27 @@ public class Passageiro {
     private Integer milhasAcumuladas;
 
     public Passageiro() {
-
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNome() {return nome;}
+    public void setNome(String nome) {this.nome = nome;}
 
-    public String getNome() {
-        return nome;
-    }
+    public Long getIdade() {return idade;}
+    public void setIdade(Long idade) {this.idade = idade;}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public String getCpf() {return cpf;}
+    public void setCpf(String cpf) {this.cpf = cpf;}
 
-    public Long getIdade() {
-        return idade;
-    }
+    public String getEmail() {return email;}
+    public void setEmail(String email) {this.email = email;}
 
-    public void setIdade(Long idade) {
-        this.idade = idade;
-    }
+    public String getCategoriaFidelidade() {return categoriaFidelidade;}
+    public void setCategoriaFidelidade(String categoriaFidelidade) {this.categoriaFidelidade = categoriaFidelidade;}
 
-    public String getEmail() {
-        return email;
-    }
+    public Integer getMilhasAcumuladas() {return milhasAcumuladas;}
+    public void setMilhasAcumuladas(Integer milhasAcumuladas) {this.milhasAcumuladas = milhasAcumuladas;}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCategoriaFidelidade() {
-        return categoriaFidelidade;
-    }
-
-    public void setCategoriaFidelidade(String categoriaFidelidade) {
-        this.categoriaFidelidade = categoriaFidelidade;
-    }
-
-    public Integer getMilhasAcumuladas() {
-        return milhasAcumuladas;
-    }
-
-    public void setMilhasAcumuladas(Integer milhasAcumuladas) {
-        this.milhasAcumuladas = milhasAcumuladas;
-    }
 }

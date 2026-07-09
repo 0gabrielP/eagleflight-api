@@ -33,4 +33,23 @@ public class PassageiroController {
 
         return passageiroRepo.save(passageiro);
     }
+    @DeleteMapping("/{id}")
+    public void deletarPassageiro(@PathVariable Long id) {
+        passageiroRepo.deleteById(id);
+    }
+    @PutMapping("/{id}")
+    public Passageiro atualizarPassageiro(@PathVariable Long id, @RequestBody Passageiro dadosAtualizados) {
+        // 1. Busca o passageiro existente pelo ID
+        Passageiro passageiroExistente = passageiroRepo.findById(id)
+                .orElseThrow(); // se não achar, joga erro
+
+        // 2. Atualiza apenas os campos que fazem sentido mudar
+        passageiroExistente.setNome(dadosAtualizados.getNome());
+        passageiroExistente.setEmail(dadosAtualizados.getEmail());
+        passageiroExistente.setCpf(dadosAtualizados.getCpf());
+        passageiroExistente.setIdade(dadosAtualizados.getIdade());
+
+        // 3. Salva de volta no banco (o .save faz update se o ID já existir)
+        return passageiroRepo.save(passageiroExistente);
+    }
 }
