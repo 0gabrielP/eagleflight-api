@@ -2,7 +2,7 @@ package com.eagleFlight.airlines.model;
 
 import jakarta.persistence.*;
 
-//Aqui são coletadas as informações referentes a viagem e também é estabelecido o vínculo com os dados do passageiro.
+//Aqui são coletadas as informações referentes a viagem e também é feito o vínculo com os dados do passageiro
 
 @Entity
 public class Viagem {

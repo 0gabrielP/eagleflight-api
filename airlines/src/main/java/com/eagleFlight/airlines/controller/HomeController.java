@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String boasVindas() {
-        return "Bem-vindo à Eagle Flight Airlines API! Linha aérea autorizada.";
+        return "Bem-vindo à Eagle Flight Airlines API!";
     }
 }

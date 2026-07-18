@@ -20,6 +20,12 @@ public class PassageiroController {
         return passageiroRepo.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Passageiro buscarPorId(@PathVariable Long id) {
+        return passageiroRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Passageiro não encontrado!"));
+    }
+
     @PostMapping
     public Passageiro cadastrarPassageiro(@Valid @RequestBody Passageiro passageiro) {
         // Validações básicas padrão para o cadastro inicial
@@ -41,7 +47,7 @@ public class PassageiroController {
     public Passageiro atualizarPassageiro(@PathVariable Long id, @RequestBody Passageiro dadosAtualizados) {
         // 1. Busca o passageiro existente pelo ID
         Passageiro passageiroExistente = passageiroRepo.findById(id)
-                .orElseThrow(); // se não achar, joga erro
+                .orElseThrow(); // se não achar, sinaliza erro
 
         // 2. Atualiza apenas os campos que fazem sentido mudar
         passageiroExistente.setNome(dadosAtualizados.getNome());

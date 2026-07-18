@@ -1,28 +1,45 @@
-- Eagle Flight Airlines API
+# Eagle Flight Airlines API
 
-Uma API robusta para gerenciamento de passageiros, viagens e programas de fidelidade, desenvolvida com Spring Boot, JPA/Hibernate e MySQL dentro de um ambiente Docker.
+Uma API REST robusta e escalável desenvolvida para o gerenciamento de programas de fidelidade e cálculo dinâmico de milhas aéreas. O projeto foi estruturado seguindo as melhores práticas de mercado, com forte separação de responsabilidades, validações defensivas e uma ampla cobertura de testes automatizados.
 
-## Funcionalidades Atuais
-- Cadastro, listagem, atualização e deleção de Passageiros (CRUD Completo).
-- Validação de dados de entrada (Bean Validation) como e-mail e CPF obrigatórios.
-- Cadastro de Viagens com vinculação automatizada ao Passageiro via banco relacional.
-- **Regra de Negócio Integrada:** Cálculo automático de preço final com descontos baseados na Categoria de Fidelidade (Prata, Ouro/Gold, etc.) e acúmulo automático de milhas no perfil do passageiro após o faturamento do voo.
+## Tecnologias e Ferramentas Utilizadas
 
-## Rotas da API (Endpoints)
+* **Linguagem:** Java 17
+* **Framework Principal:** Spring Boot 3
+* **Persistência de Dados:** Spring Data JPA / Hibernate
+* **Banco de Dados:** MySQL
+* **Gerenciamento de Migrações:** Flyway
+* **Containerização:** Docker & Docker Compose
+* **Testes Automatizados:** JUnit 5 & Mockito
+* **Validação de Dados:** Jakarta Validation
 
-### Passageiros (`/passageiros`)
-- `POST /passageiros` - Cadastra um novo passageiro (Campos blindados: Nome, E-mail, CPF, Idade).
-- `GET /passageiros` - Lista todos os passageiros cadastrados e seus saldos de milhas.
-- `PUT /passageiros/{id}` - Atualiza dados cadastrais de um passageiro mantendo o histórico de milhas intacto.
-- `DELETE /passageiros/{id}` - Remove um passageiro do sistema.
+## Arquitetura do Sistema
 
-### Viagens (`/viagens`)
-- `POST /viagens` - Cadastra uma nova viagem associada a um passageiro existente, aplicando regras de desconto e gerando milhas.
-- `GET /viagens` - Lista o histórico de todas as viagens faturadas no sistema.
+O projeto adota a arquitetura em camadas padrão de mercado, garantindo manutenibilidade e baixo acoplamento:
+* **Controllers:** Exposição dos endpoints REST e validação inicial das requisições com `jakarta.validation`.
+* **Services:** Concentração e isolamento de todas as regras de negócio complexas (como cálculo dinâmico de descontos e acúmulo de milhas por categoria).
+* **Repositories:** Camada de abstração e comunicação com o banco de dados via JPA.
+* **Models/Entities:** Mapeamento objeto-relacional (ORM) e definição de constraints do banco de dados.
 
-## Tecnologias Utilizadas
-- Java 17 / Spring Boot
-- Spring Data JPA & Hibernate
-- Bean Validation (Mapeamento e Blindagem)
-- Banco de Dados MySQL (Rodando via Docker)
-- Postman (Para testes de integração)
+## Diferenciais Técnicos (Práticas de Produção)
+
+* **Tratamento Global de Exceções:** Implementação de um `GlobalExceptionHandler` utilizando `@RestControllerAdvice`, garantindo que a API responda com status HTTP semanticamente corretos e mensagens amigáveis em cenários de erro.
+* **Migrações Automatizadas:** Uso do Flyway para versionamento do esquema do banco de dados (`V1__criar_tabelas.sql`), garantindo consistência entre ambientes de desenvolvimento e produção.
+* **Ambiente Isolado com Docker:** Configuração do MySQL via Docker Compose, permitindo que a aplicação seja executada localmente com um único comando, sem necessidade de instalações locais complexas.
+
+## Qualidade de Código e TestesAutomatizados
+
+O projeto possui uma forte cultura de qualidade, com testes cobrindo os fluxos críticos da aplicação:
+* **Testes Unitários (Mockito):** Isolamento de regras de negócio na camada de serviço (`FidelidadeServiceTest`), garantindo o comportamento correto dos fluxos com mocks controlados e asserções rigorosas (incluindo testes de lançamento de exceções).
+* **Testes de Integração de API (MockMvc):** Validação dos contratos dos controllers (`PassageiroControllerTest`), testando o comportamento das rotas HTTP, status de retorno e payload JSON (`jsonPath`).
+
+## Como Executar o Projeto
+
+### Pré-requisitos
+* Java 17 instalado
+* Docker e Docker Compose instalados
+
+### Passo a Passo
+1. Clone o repositório:
+   ```bash
+   git clone [https://github.com/seu-usuario/eagle-flight-airlines.git](https://github.com/seu-usuario/eagle-flight-airlines.git)

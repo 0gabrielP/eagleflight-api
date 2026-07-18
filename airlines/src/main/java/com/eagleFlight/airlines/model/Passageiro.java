@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-//Aqui são coletados todos os dados de passageiros, bem como a organização das informações no Banco de Dados.
+//Aqui são coletados todos os dados de passageiros, bem como a organização das informações no Banco de Dados
 
 @Entity
 public class Passageiro {

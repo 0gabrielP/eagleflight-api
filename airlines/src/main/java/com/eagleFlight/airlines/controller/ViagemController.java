@@ -31,14 +31,14 @@ public class ViagemController {
 
     @PostMapping
     public Viagem cadastrarViagem(@RequestBody Viagem viagem) {
-        // 1. Verificar se a viagem possui um passageiro vinculado.
+        // 1. Verificar se a viagem possui um passageiro vinculado
         if (viagem.getPassageiro() != null && viagem.getPassageiro().getId() != null) {
 
-            // 2. Busca o passageiro. Se NÃO achar, o .orElseThrow() joga a exceção que o GlobalExceptionHandler vai identificar!
+            // 2. Busca o passageiro, caso não seja identificado, erro é sinalizado
             Passageiro passageiro = passageiroRepo.findById(viagem.getPassageiro().getId())
                     .orElseThrow();
 
-            // 3. Calcular preço final com desconto baseado na categoria
+            // 3. Calcula o preço final com desconto baseado na categoria
             double precoFinal = fidelidadeService.calcularPrecoFinal(viagem.getPrecoOriginal(), passageiro.getCategoriaFidelidade());
             viagem.setPrecoFinal(precoFinal);
 

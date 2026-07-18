@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
             listaErros.put(nomeCampo, mensagemErro);
         });
 
-        // Retorna o status 400 Bad Request limpo, contendo apenas o mapa com os erros formatados.
+        // Retorna o status 400 Bad Request limpo, contendo apenas o mapa com os erros formatados
         return new ResponseEntity<>(listaErros, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(NoSuchElementException.class)
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
         Map<String, String> erro = new HashMap<>();
         erro.put("mensagem", "A informação solicitada não foi encontrada no sistema (ID inválido ou inexistente).");
 
-        // Retorna o erro 404 Not Found limpo.
+        // Retorna o erro 404 Not Found limpo
         return new ResponseEntity<>(erro, HttpStatus.NOT_FOUND);
     }
 }
