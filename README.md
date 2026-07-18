@@ -42,4 +42,4 @@ O projeto possui uma forte cultura de qualidade, com testes cobrindo os fluxos c
 ### Passo a Passo
 1. Clone o repositório:
    ```bash
-   git clone [https://github.com/seu-usuario/eagle-flight-airlines.git](https://github.com/seu-usuario/eagle-flight-airlines.git)
+   git clone [https://github.com/0gabrielP/eagle-flight-airlines.git](https://github.com/0gabrielP/eagle-flight-airlines.git)
